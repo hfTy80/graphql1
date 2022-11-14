@@ -1,8 +1,10 @@
 # graphql1
 
-If you run this with:
-
-node server.js
-You should see the GraphQL response printed out:
-
-{ data: { hello: 'Hello world!' } }
+0. change graphql version to 15.8.0
+1. npm install express express-graphql graphql --save
+2. node server.js
+3. http://localhost:4000/graphql
+4. run query
+{
+    hello
+}
