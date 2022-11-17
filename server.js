@@ -1,25 +1,22 @@
 var express = require('express');
 var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
+const { readFileSync } = require('fs')
+const { join } = require('path')
+const resolvers = require('./lib/resolvers')
 
 // Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-// The root provides a resolver function for each API endpoint
-var root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-};
+const schema = buildSchema(
+    readFileSync(
+      join(__dirname, 'lib', 'schema.graphql'),
+      'utf-8'
+    )
+  )
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
+  rootValue: resolvers,
   graphiql: true,
 }));
 app.listen(4000);

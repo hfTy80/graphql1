@@ -1,0 +1,22 @@
+type Query {
+    hello: String,
+    test: String,
+    "Devuelve todos cursos"
+    getCourses: [Course]
+    "Devuelve un curso"
+    findCourse(id: ID!): Course
+  }
+
+
+type Course {
+  id: ID!
+  title: String
+  teacher: String
+  description: String
+  topic: 
+  String
+}
+
+type Mutation  {
+   addCourse(id: ID, title: String): Course
+}
